@@ -3,20 +3,18 @@ const cors = require("cors");
 const app = express();
 const port = 443;
 
-// Autoriser uniquement une ou plusieurs origines spécifiques
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Autoriser toutes les origines sauf si le 'origin' est indéterminé (en développement)
       if (!origin) {
         return callback(null, true);
       }
       return callback(null, true);
     },
-    credentials: true, // Pour autoriser les cookies/identifiants
+    credentials: true,
   })
 );
-app.use(express.json()); // Nécessaire pour obtenir `req.body` comme JSON
+app.use(express.json());
 
 app.get("/", (req, res) => { res.json({"test": "test"})});
   
@@ -132,29 +130,6 @@ app.post("/", (req, res) => {
               0
             );
 
-            console.log(
-              "account:",
-              email,
-              "totalAmountSpent:",
-              totalAmountSpent,
-              "totalBarrelAmount:",
-              totalBarrelAmount,
-              "totalProvisionAmount:",
-              totalProvisionAmount,
-              "totalTransfertInAmount:",
-              totalTransfertInAmount,
-              "totalTransfertOutAmount:",
-              totalTransfertOutAmount,
-              "totalSharedMealAmount:",
-              totalSharedMealAmount,
-              "sharedMealNumber:",
-              sharedMealNumber,
-              "barrelNumber:",
-              totalBarrelNumber,
-              "provisionNumber:",
-              totalProvisionNumber
-            );
-
             res.json({
               totalAmountSpent,
               totalBarrelAmount,
@@ -177,7 +152,6 @@ app.post("/", (req, res) => {
     });
 });
 
-// Démarrer le serveur
 app.listen(port, () => {
   console.log(`Serveur en cours d'exécution sur http://localhost:${port}`);
 });
