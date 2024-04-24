@@ -18,6 +18,9 @@ app.use(
 );
 app.use(express.json()); // Nécessaire pour obtenir `req.body` comme JSON
 
+app.get("/get-data", (req, res) => { res.json({"test": "test"})});
+  
+
 app.post("/get-data", (req, res) => {
   const { email, password } = req.body;
 
