@@ -4,18 +4,13 @@ const app = express();
 const port = 443;
 
 // Autoriser uniquement une ou plusieurs origines spécifiques
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Autoriser toutes les origines sauf si le 'origin' est indéterminé (en développement)
-      if (!origin) {
-        return callback(null, true);
-      }
-      return callback(null, true);
-    },
-    credentials: true, // Pour autoriser les cookies/identifiants
-  })
-);
+app.use(cors({
+    origin: '*', // Autorise toutes les origines
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Méthodes HTTP autorisées
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  }));
+  
 app.use(express.json()); // Nécessaire pour obtenir `req.body` comme JSON
 
 app.post("/get-data", (req, res) => {
